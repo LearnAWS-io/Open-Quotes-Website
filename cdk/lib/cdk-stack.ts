@@ -1,5 +1,7 @@
+import { AstroAWS } from "@astro-aws/constructs";
 import * as cdk from "aws-cdk-lib";
 import { CfnOutput } from "aws-cdk-lib";
+import { CachePolicy } from "aws-cdk-lib/aws-cloudfront";
 import { AttributeType, Table } from "aws-cdk-lib/aws-dynamodb";
 import { AccessKey, Effect, User } from "aws-cdk-lib/aws-iam";
 import * as PolicyStatement from "cdk-iam-floyd";
@@ -42,9 +44,36 @@ export class CdkStack extends cdk.Stack {
       user: lexRecogTextUser,
     });
 
-    new CfnOutput(this, "AccessKeyId", { value: accessKey.accessKeyId });
+    const astroAws = new AstroAWS(this, "quotes-app", {
+      websiteDir: "../",
+      output: "server",
+      cdk: {
+        cloudfrontDistribution: {
+          defaultBehavior: {
+            cachePolicy: CachePolicy.CACHING_DISABLED,
+
+          },
+        },
+        lambdaFunction: {
+          environment: {
+            TABLE_NAME: quotesDbTable.tableName,
+          },
+        },
+      },
+    });
+
+    if (!astroAws.cdk.lambdaFunction) {
+      throw Error("Unable to get lambda ref");
+    }
+
+    quotesDbTable.grantReadData(astroAws.cdk.lambdaFunction);
+
+    new CfnOutput(this, "WebsiteDomain", {
+      value: astroAws.cdk.cloudfrontDistribution.distributionDomainName,
+    });
+    /* new CfnOutput(this, "AccessKeyId", { value: accessKey.accessKeyId });
     new CfnOutput(this, "AccessKeySecret", {
       value: accessKey.secretAccessKey.unsafeUnwrap(),
-    });
+    }); */
   }
 }

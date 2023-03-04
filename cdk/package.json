@@ -21,6 +21,7 @@
     "typescript": "~4.9.5"
   },
   "dependencies": {
+    "@astro-aws/constructs": "^0.3.0",
     "aws-cdk-lib": "2.67.0",
     "cdk-iam-floyd": "^0.485.0",
     "constructs": "^10.0.0",

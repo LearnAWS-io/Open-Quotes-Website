@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@astro-aws/constructs': ^0.3.0
   '@types/jest': ^29.4.0
   '@types/node': 18.14.2
   aws-cdk: 2.67.0
@@ -15,6 +16,7 @@ specifiers:
   typescript: ~4.9.5
 
 dependencies:
+  '@astro-aws/constructs': 0.3.0_jmofhxelfvi74t7qfupginzp2e
   aws-cdk-lib: 2.67.0_constructs@10.1.265
   cdk-iam-floyd: 0.485.0_jmofhxelfvi74t7qfupginzp2e
   constructs: 10.1.265
@@ -39,6 +41,17 @@ packages:
       '@jridgewell/gen-mapping': 0.1.1
       '@jridgewell/trace-mapping': 0.3.17
     dev: true
+
+  /@astro-aws/constructs/0.3.0_jmofhxelfvi74t7qfupginzp2e:
+    resolution: {integrity: sha512-q+R3kJQoSgHi/eSobLTur5mkAd2ayLEjWx8wLKLyAs8aqMU4RQF8S2+u3wk5Xdq7UapH6egPKpJ99ufnnuiw5w==}
+    engines: {node: 16.x || 18.x}
+    peerDependencies:
+      aws-cdk-lib: ^2.40.0
+      constructs: ^10.1.0
+    dependencies:
+      aws-cdk-lib: 2.67.0_constructs@10.1.265
+      constructs: 10.1.265
+    dev: false
 
   /@aws-cdk/asset-awscli-v1/2.2.90:
     resolution: {integrity: sha512-9CMDc29JqYyY94g9m8jWyY9SGhmgqNs5E+uTGUZGfWLniK/a4Sv8gu7pr9jC2L92NpVOzgjgGPnQ1afabvtDZA==}
