@@ -33,13 +33,16 @@ export const listQuotes = async (
     PK: PK,
   };
 
+  console.log("firstQuoteId", firstQuoteId);
+  console.log("lastQuoteId", lastQuoteId);
+
   const quotesQueryCmd = new QueryCommand({
     TableName,
     IndexName: "GSI1",
     KeyConditionExpression: expression,
     ExpressionAttributeValues: expressionValues,
     ExclusiveStartKey: firstQuoteId || lastQuoteId ? startKey : undefined,
-    Limit: 2,
+    Limit: 3,
     ScanIndexForward: firstQuoteId ? true : false,
   });
 
@@ -53,5 +56,9 @@ export const listQuotes = async (
     return { ...quote, id: quote.PK.split("#")[1] };
   });
 
-  return { quotes, hasMoreItems: Boolean(res.LastEvaluatedKey) };
+  return {
+    // NOTE: Reverse the items when revering scan
+    quotes: firstQuoteId ? quotes.reverse() : quotes,
+    hasMoreItems: Boolean(res.LastEvaluatedKey),
+  };
 };
