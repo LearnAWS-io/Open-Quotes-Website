@@ -33,11 +33,11 @@ const nextBtnDisabled =
     </ul>
 
     <div class="pagination-container">
-      <a href={`?firstQuote=${curFirstQuoteId}`}
-        ><button disabled={prvBtnDisabled}>&larr; Prv</button></a
+      <a data-disabled={prvBtnDisabled} href={`?firstQuote=${curFirstQuoteId}`}
+        >&larr; Prv</a
       >
-      <a href={`?lastQuote=${curLastQuoteId}`}
-        ><button disabled={nextBtnDisabled}>Next &rarr;</button></a
+      <a data-disabled={nextBtnDisabled} href={`?lastQuote=${curLastQuoteId}`}
+        >Next &rarr;</a
       >
     </div>
     <p class="instructions">
@@ -55,7 +55,12 @@ const nextBtnDisabled =
   .link {
     text-decoration: none;
   }
-  button[disabled] {
+  a {
+    color: #111;
+  }
+  a[data-disabled] {
+    pointer-events: none;
+    visibility: hidden;
     cursor: not-allowed;
   }
   button {
@@ -103,5 +108,6 @@ const nextBtnDisabled =
   .pagination-container {
     display: flex;
     justify-content: space-between;
+    padding: 0 5px;
   }
 </style>
