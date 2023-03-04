@@ -1,20 +1,28 @@
 ---
 import type { QuoteRes } from "../api/listQuotes";
+import Label from "./Label.astro";
 
 export type Props = QuoteRes;
-const { id, title, quote, author } = Astro.props;
+const { id, title, quote, author, categories } = Astro.props;
 const href = `/${id}`;
 ---
 
 <li class="link-card">
-  <a href={href}>
-    <h2>
-      {title}
-    </h2>
+  <span class="link">
+    <a class="title" title="Learn more" href={href}>
+      <h2>
+        {title}
+      </h2>
+    </a>
     <p>{quote}</p>
-    <span class="author">~ {author}</span>
-  </a>
+
+    <div class="footer">
+      <Label labels={categories} />
+      <span class="author">~ {author}</span>
+    </div>
+  </span>
 </li>
+
 <style>
   .link-card {
     list-style: none;
@@ -31,31 +39,53 @@ const href = `/${id}`;
       0 2px 4px -2px rgba(0, 0, 0, 0.1);
   }
 
-  .link-card > a {
+  .link-card .link {
     width: 100%;
-    text-decoration: none;
     line-height: 1.4;
     padding: 1rem 1.3rem;
     padding-bottom: 1.5rem;
     border-radius: 0.35rem;
-    color: #111;
     background-color: white;
     opacity: 0.8;
+  }
+  a {
+    color: #111;
+    text-decoration: none;
+  }
+  a::before {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+  }
+  .title {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
   }
   h2 {
     margin: 0;
     font-size: 1.25rem;
+    display: inline;
     transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
   }
+  .footer {
+    display: flex;
+    justify-content: space-between;
+  }
   .author {
-    position: absolute;
-    bottom: 12px;
-    right: 15px;
+    /* position: absolute; */
+    /* bottom: 12px; */
+    /* right: 15px; */
     color: #444;
   }
   p {
     margin-top: 0.5rem;
-    margin-bottom: 0;
+    margin-bottom: 0.7rem;
     color: #444;
     white-space: pre-line;
   }
@@ -63,6 +93,7 @@ const href = `/${id}`;
     background-position: 0;
     background-image: var(--accent-gradient);
   }
+
   .link-card:is(:hover, :focus-within) h2 {
     color: rgb(var(--accent));
   }

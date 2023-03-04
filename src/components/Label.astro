@@ -1,0 +1,29 @@
+---
+export type Props = {
+  labels: string[];
+};
+const { labels } = Astro.props;
+---
+
+<span>
+  {labels.map((label) => <a href={`/topic/${label}`}>{label}</a>)}
+</span>
+
+<style>
+  span {
+    position: relative;
+    z-index: 2;
+  }
+  a {
+    font-size: 14px;
+    line-height: 1.25rem;
+    text-decoration: none;
+    margin-right: 4px;
+    border-radius: 15px;
+    font-weight: 600;
+    padding: 0px 7px;
+    color: #fff;
+    border: 2px solid transparent;
+    background: #333;
+  }
+</style>
