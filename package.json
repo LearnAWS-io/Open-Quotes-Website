@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "deploy": "cd cdk; npx cdk deploy",
     "preview": "astro preview",
     "astro": "astro"
   },
