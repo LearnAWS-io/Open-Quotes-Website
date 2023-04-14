@@ -1,6 +1,6 @@
 ---
 export interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
@@ -8,28 +8,99 @@ const { title } = Astro.props;
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a href="/" class="heading"><h1 class="text-gradient">Open Quotes</h1></a>
+    <slot />
+  </body>
 </html>
+
 <style is:global>
-	:root {
-		--accent: 124, 58, 237;
-		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background-color: #F6F6F6;
-	}
-	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
-	}
+  :root {
+    --accent: 124, 58, 237;
+    --accent-gradient: linear-gradient(
+      45deg,
+      rgb(var(--accent)),
+      #da62c4 30%,
+      white 60%
+    );
+  }
+  html {
+    font-family: system-ui, sans-serif;
+    background-color: #f6f6f6;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --accent: 31, 199, 0;
+      --accent-gradient: linear-gradient(
+        -125deg,
+        rgb(var(--accent)),
+        #1fc700 30%,
+        #137b00 60%
+      );
+    }
+
+    html {
+      background-color: #222;
+    }
+
+    body .text-gradient {
+      background-image: linear-gradient(
+        -125deg,
+        #1fffff,
+        #1fc700 30%,
+        #3bbf4a 60%
+      );
+    }
+    p.instructions {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    h1,
+    p,
+    h2,
+    h3,
+    a,
+    h4,
+    .link-card,
+    .author {
+      color: #fcfcfc !important;
+    }
+    .link {
+    }
+    a.chip {
+      background: #555;
+    }
+    li.link-card {
+      background: #333;
+    }
+
+    li.link-card span.link {
+      background-color: #333;
+    }
+  }
+
+  .text-gradient {
+    text-align: center;
+    background-image: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400%;
+    background-position: 0%;
+  }
+  a.heading {
+    text-decoration: none;
+  }
+  h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin: 0;
+  }
 </style>

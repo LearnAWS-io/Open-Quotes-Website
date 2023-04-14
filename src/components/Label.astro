@@ -6,7 +6,7 @@ const { labels } = Astro.props;
 ---
 
 <span>
-  {labels.map((label) => <a href={`/topic/${label}`}>{label}</a>)}
+  {labels.map((label) => <a class="chip" href={`/topic/${label}`}>{label}</a>)}
 </span>
 
 <style>

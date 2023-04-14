@@ -27,7 +27,6 @@ const nextBtnDisabled =
 
 <Layout title="Open Quotes - Quotes powered by Github Issues">
   <main>
-    <a href="/" class="link"><h1 class="text-gradient">Open Quotes</h1></a>
     <ul role="list" class="link-card-grid">
       {quotes?.map((quote) => <Card {...quote} />)}
     </ul>
@@ -52,9 +51,6 @@ const nextBtnDisabled =
     padding: 1.5rem;
     max-width: 60ch;
   }
-  .link {
-    text-decoration: none;
-  }
   a {
     color: #111;
   }
@@ -66,19 +62,7 @@ const nextBtnDisabled =
   button {
     cursor: pointer;
   }
-  h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    margin: 0;
-  }
-  .text-gradient {
-    text-align: center;
-    background-image: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 400%;
-    background-position: 0%;
-  }
+
   .instructions {
     line-height: 1.6;
     margin: 1rem 0;
@@ -88,17 +72,7 @@ const nextBtnDisabled =
     padding: 1rem;
     border-radius: 0.4rem;
   }
-  .instructions code {
-    font-size: 0.875em;
-    font-weight: bold;
-    background: rgba(var(--accent), 12%);
-    color: rgb(var(--accent));
-    border-radius: 4px;
-    padding: 0.3em 0.45em;
-  }
-  .instructions strong {
-    color: rgb(var(--accent));
-  }
+
   .link-card-grid {
     display: flex;
     flex-direction: column;
