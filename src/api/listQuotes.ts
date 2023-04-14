@@ -1,18 +1,9 @@
 import { AttributeValue, QueryCommand } from "@aws-sdk/client-dynamodb";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
-import { BaseTable, dbClient } from "./db";
+import { dbClient } from "./db";
+import type { QuoteRes } from "./types";
 
 const { TABLE_NAME: TableName } = import.meta.env;
-
-export type QuoteRes = {
-  author: string;
-  title: string;
-  quote: string;
-  categories: string[];
-  createdAt: string;
-  postedBy: string;
-  id: string;
-} & BaseTable;
 
 export const listQuotes = async (
   lastQuoteId?: string | null,
@@ -42,7 +33,7 @@ export const listQuotes = async (
     KeyConditionExpression: expression,
     ExpressionAttributeValues: expressionValues,
     ExclusiveStartKey: firstQuoteId || lastQuoteId ? startKey : undefined,
-    Limit: 3,
+    Limit: 5,
     ScanIndexForward: firstQuoteId ? true : false,
   });
 
